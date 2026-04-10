@@ -22,7 +22,7 @@ The official brand identity for the application.
 
 ### 🔹 App Interface & Functionality
 The main dashboard featuring the full range of arithmetic and scientific operations.
-<img src="app-interface.png" width="350" alt="Calculator Main Interface">
+<img src="app-interface.png" width="200" alt="Calculator Main Interface">
 
 ---
 
