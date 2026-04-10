@@ -1,25 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_gradient"
-    android:padding="8dp">
+    android:padding="12dp">
 
     <!-- Title -->
     <TextView
         android:id="@+id/tvTitulu"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="16dp"
         android:text="@string/titulu"
         android:textAlignment="center"
-        android:textColor="#00E5FF"
-        android:textSize="18sp"
+        android:textColor="@color/warm_accent_light"
+        android:textSize="20sp"
         android:textStyle="bold"
         android:fontFamily="sans-serif-medium"
-        android:letterSpacing="0.05"
+        android:letterSpacing="0.1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -29,7 +30,7 @@
         android:id="@+id/etInput"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="24dp"
         android:background="@drawable/edittext_rounded"
         android:cursorVisible="false"
         android:focusable="false"
@@ -38,10 +39,10 @@
         android:gravity="end"
         android:hint="@string/input_hint"
         android:inputType="numberDecimal"
-        android:padding="12dp"
-        android:textColor="#FFFFFF"
-        android:textColorHint="#80FFFFFF"
-        android:textSize="20sp"
+        android:padding="16dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/text_hint"
+        android:textSize="24sp"
         android:importantForAutofill="no"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -57,10 +58,10 @@
         android:fontFamily="monospace"
         android:gravity="center"
         android:hint="@string/Resultado"
-        android:padding="16dp"
+        android:padding="20dp"
         android:textAlignment="center"
-        android:textColor="#00E5FF"
-        android:textSize="20sp"
+        android:textColor="@color/accent_warm"
+        android:textSize="28sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -71,9 +72,9 @@
         android:id="@+id/scrollView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="16dp"
         android:fillViewport="true"
-        android:scrollbars="vertical"
+        android:scrollbars="none"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -82,352 +83,68 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="8dp">
+            android:paddingBottom="16dp">
 
-            <!-- Horizontal guidelines for left/right margins -->
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline_start"
-                android:layout_width="wrap_content"
+            <androidx.constraintlayout.helper.widget.Flow
+                android:id="@+id/buttonFlow"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_begin="8dp" />
+                app:constraint_referenced_ids="btnClearAll,btnClear,btnDivisao,btnMultiplicacao,btn7,btn8,btn9,btnSubtracao,btn4,btn5,btn6,btnSoma,btn1,btn2,btn3,btnEquals,btn0,btnDecimal,btnSqrt,btnPercent,btnSin,btnCos,btnTan,btnLn,btnLog,btnExp,btnPower,btnNthRoot,btnOpenParen,btnCloseParen,btnPi,btnE"
+                app:flow_maxElementsWrap="4"
+                app:flow_wrapMode="aligned"
+                app:flow_horizontalGap="8dp"
+                app:flow_verticalGap="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline_end"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_end="8dp" />
+            <!-- Row 1 -->
+            <Button android:id="@+id/btnClearAll" style="@style/SpecialButton" android:text="@string/btn_clear_all" android:onClick="onClearAllClick" />
+            <Button android:id="@+id/btnClear" style="@style/SpecialButton" android:text="@string/btn_clear" android:onClick="onClearClick" />
+            <Button android:id="@+id/btnDivisao" style="@style/OperationButton" android:text="@string/btn_divide" android:onClick="onOperationClick" />
+            <Button android:id="@+id/btnMultiplicacao" style="@style/OperationButton" android:text="@string/btn_multiply" android:onClick="onOperationClick" />
 
-            <!-- Row 1: AC, ⌫, ÷, × -->
-            <Button
-                android:id="@+id/btnClearAll"
-                style="@style/OperationButton"
-                android:text="@string/btn_clear_all"
-                android:onClick="onClearAllClick"
-                app:layout_constraintEnd_toStartOf="@id/btnClear"
-                app:layout_constraintStart_toStartOf="@id/guideline_start"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintWidth_default="wrap" />
+            <!-- Row 2 -->
+            <Button android:id="@+id/btn7" style="@style/NumberButton" android:text="@string/btn_7" android:onClick="onNumberClick" />
+            <Button android:id="@+id/btn8" style="@style/NumberButton" android:text="@string/btn_8" android:onClick="onNumberClick" />
+            <Button android:id="@+id/btn9" style="@style/NumberButton" android:text="@string/btn_9" android:onClick="onNumberClick" />
+            <Button android:id="@+id/btnSubtracao" style="@style/OperationButton" android:text="@string/btn_subtract" android:onClick="onOperationClick" />
 
-            <Button
-                android:id="@+id/btnClear"
-                style="@style/OperationButton"
-                android:text="@string/btn_clear"
-                android:onClick="onClearClick"
-                app:layout_constraintEnd_toStartOf="@id/btnDivisao"
-                app:layout_constraintStart_toEndOf="@id/btnClearAll"
-                app:layout_constraintTop_toTopOf="@id/btnClearAll"
-                app:layout_constraintWidth_default="wrap" />
+            <!-- Row 3 -->
+            <Button android:id="@+id/btn4" style="@style/NumberButton" android:text="@string/btn_4" android:onClick="onNumberClick" />
+            <Button android:id="@+id/btn5" style="@style/NumberButton" android:text="@string/btn_5" android:onClick="onNumberClick" />
+            <Button android:id="@+id/btn6" style="@style/NumberButton" android:text="@string/btn_6" android:onClick="onNumberClick" />
+            <Button android:id="@+id/btnSoma" style="@style/OperationButton" android:text="@string/btn_add" android:onClick="onOperationClick" />
 
-            <Button
-                android:id="@+id/btnDivisao"
-                style="@style/OperationButton"
-                android:text="@string/btn_divide"
-                android:onClick="onOperationClick"
-                app:layout_constraintEnd_toStartOf="@id/btnMultiplicacao"
-                app:layout_constraintStart_toEndOf="@id/btnClear"
-                app:layout_constraintTop_toTopOf="@id/btnClearAll"
-                app:layout_constraintWidth_default="wrap" />
+            <!-- Row 4 -->
+            <Button android:id="@+id/btn1" style="@style/NumberButton" android:text="@string/btn_1" android:onClick="onNumberClick" />
+            <Button android:id="@+id/btn2" style="@style/NumberButton" android:text="@string/btn_2" android:onClick="onNumberClick" />
+            <Button android:id="@+id/btn3" style="@style/NumberButton" android:text="@string/btn_3" android:onClick="onNumberClick" />
+            <Button android:id="@+id/btnEquals" style="@style/SpecialButton" android:text="@string/btn_equals" android:onClick="onEqualsClick" />
 
-            <Button
-                android:id="@+id/btnMultiplicacao"
-                style="@style/OperationButton"
-                android:text="@string/btn_multiply"
-                android:onClick="onOperationClick"
-                app:layout_constraintEnd_toEndOf="@id/guideline_end"
-                app:layout_constraintStart_toEndOf="@id/btnDivisao"
-                app:layout_constraintTop_toTopOf="@id/btnClearAll"
-                app:layout_constraintWidth_default="wrap" />
+            <!-- Row 5 -->
+            <Button android:id="@+id/btn0" style="@style/NumberButton" android:text="@string/btn_0" android:onClick="onNumberClick" />
+            <Button android:id="@+id/btnDecimal" style="@style/NumberButton" android:text="@string/btn_decimal" android:onClick="onNumberClick" />
+            <Button android:id="@+id/btnSqrt" style="@style/OperationButton" android:text="@string/btn_sqrt" android:onClick="onSqrtClick" />
+            <Button android:id="@+id/btnPercent" style="@style/OperationButton" android:text="@string/btn_percent" android:onClick="onPercentClick" />
 
-            <!-- Row 2: 7, 8, 9, – -->
-            <Button
-                android:id="@+id/btn7"
-                style="@style/NumberButton"
-                android:text="@string/btn_7"
-                android:onClick="onNumberClick"
-                app:layout_constraintEnd_toStartOf="@id/btn8"
-                app:layout_constraintStart_toStartOf="@id/guideline_start"
-                app:layout_constraintTop_toBottomOf="@id/btnClearAll"
-                app:layout_constraintWidth_default="wrap" />
+            <!-- Row 6 -->
+            <Button android:id="@+id/btnSin" style="@style/OperationButton" android:text="sin" android:onClick="onSinClick" />
+            <Button android:id="@+id/btnCos" style="@style/OperationButton" android:text="cos" android:onClick="onCosClick" />
+            <Button android:id="@+id/btnTan" style="@style/OperationButton" android:text="tan" android:onClick="onTanClick" />
+            <Button android:id="@+id/btnLn" style="@style/OperationButton" android:text="ln" android:onClick="onLnClick" />
 
-            <Button
-                android:id="@+id/btn8"
-                style="@style/NumberButton"
-                android:text="@string/btn_8"
-                android:onClick="onNumberClick"
-                app:layout_constraintEnd_toStartOf="@id/btn9"
-                app:layout_constraintStart_toEndOf="@id/btn7"
-                app:layout_constraintTop_toTopOf="@id/btn7"
-                app:layout_constraintWidth_default="wrap" />
+            <!-- Row 7 -->
+            <Button android:id="@+id/btnLog" style="@style/OperationButton" android:text="log" android:onClick="onLogClick" />
+            <Button android:id="@+id/btnExp" style="@style/OperationButton" android:text="eˣ" android:onClick="onExpClick" />
+            <Button android:id="@+id/btnPower" style="@style/OperationButton" android:text="xʸ" android:onClick="onPowerClick" />
+            <Button android:id="@+id/btnNthRoot" style="@style/OperationButton" android:text="ⁿ√x" android:onClick="onNthRootClick" />
 
-            <Button
-                android:id="@+id/btn9"
-                style="@style/NumberButton"
-                android:text="@string/btn_9"
-                android:onClick="onNumberClick"
-                app:layout_constraintEnd_toStartOf="@id/btnSubtracao"
-                app:layout_constraintStart_toEndOf="@id/btn8"
-                app:layout_constraintTop_toTopOf="@id/btn7"
-                app:layout_constraintWidth_default="wrap" />
-
-            <Button
-                android:id="@+id/btnSubtracao"
-                style="@style/OperationButton"
-                android:text="@string/btn_subtract"
-                android:onClick="onOperationClick"
-                app:layout_constraintEnd_toEndOf="@id/guideline_end"
-                app:layout_constraintStart_toEndOf="@id/btn9"
-                app:layout_constraintTop_toTopOf="@id/btn7"
-                app:layout_constraintWidth_default="wrap" />
-
-            <!-- Row 3: 4, 5, 6, + -->
-            <Button
-                android:id="@+id/btn4"
-                style="@style/NumberButton"
-                android:text="@string/btn_4"
-                android:onClick="onNumberClick"
-                app:layout_constraintEnd_toStartOf="@id/btn5"
-                app:layout_constraintStart_toStartOf="@id/guideline_start"
-                app:layout_constraintTop_toBottomOf="@id/btn7"
-                app:layout_constraintWidth_default="wrap" />
-
-            <Button
-                android:id="@+id/btn5"
-                style="@style/NumberButton"
-                android:text="@string/btn_5"
-                android:onClick="onNumberClick"
-                app:layout_constraintEnd_toStartOf="@id/btn6"
-                app:layout_constraintStart_toEndOf="@id/btn4"
-                app:layout_constraintTop_toTopOf="@id/btn4"
-                app:layout_constraintWidth_default="wrap" />
-
-            <Button
-                android:id="@+id/btn6"
-                style="@style/NumberButton"
-                android:text="@string/btn_6"
-                android:onClick="onNumberClick"
-                app:layout_constraintEnd_toStartOf="@id/btnSoma"
-                app:layout_constraintStart_toEndOf="@id/btn5"
-                app:layout_constraintTop_toTopOf="@id/btn4"
-                app:layout_constraintWidth_default="wrap" />
-
-            <Button
-                android:id="@+id/btnSoma"
-                style="@style/OperationButton"
-                android:text="@string/btn_add"
-                android:onClick="onOperationClick"
-                app:layout_constraintEnd_toEndOf="@id/guideline_end"
-                app:layout_constraintStart_toEndOf="@id/btn6"
-                app:layout_constraintTop_toTopOf="@id/btn4"
-                app:layout_constraintWidth_default="wrap" />
-
-            <!-- Row 4: 1, 2, 3, = (spans two rows) -->
-            <Button
-                android:id="@+id/btn1"
-                style="@style/NumberButton"
-                android:text="@string/btn_1"
-                android:onClick="onNumberClick"
-                app:layout_constraintEnd_toStartOf="@id/btn2"
-                app:layout_constraintStart_toStartOf="@id/guideline_start"
-                app:layout_constraintTop_toBottomOf="@id/btn4"
-                app:layout_constraintWidth_default="wrap" />
-
-            <Button
-                android:id="@+id/btn2"
-                style="@style/NumberButton"
-                android:text="@string/btn_2"
-                android:onClick="onNumberClick"
-                app:layout_constraintEnd_toStartOf="@id/btn3"
-                app:layout_constraintStart_toEndOf="@id/btn1"
-                app:layout_constraintTop_toTopOf="@id/btn1"
-                app:layout_constraintWidth_default="wrap" />
-
-            <Button
-                android:id="@+id/btn3"
-                style="@style/NumberButton"
-                android:text="@string/btn_3"
-                android:onClick="onNumberClick"
-                app:layout_constraintEnd_toStartOf="@id/btnEquals"
-                app:layout_constraintStart_toEndOf="@id/btn2"
-                app:layout_constraintTop_toTopOf="@id/btn1"
-                app:layout_constraintWidth_default="wrap" />
-
-            <Button
-                android:id="@+id/btnEquals"
-                style="@style/OperationButton"
-                android:text="@string/btn_equals"
-                android:onClick="onEqualsClick"
-                android:layout_height="0dp"
-                app:layout_constraintBottom_toBottomOf="@id/btn0"
-                app:layout_constraintEnd_toEndOf="@id/guideline_end"
-                app:layout_constraintStart_toEndOf="@id/btn3"
-                app:layout_constraintTop_toTopOf="@id/btn1"
-                app:layout_constraintWidth_default="wrap" />
-
-            <!-- Row 5: 0, ., √, % -->
-            <Button
-                android:id="@+id/btn0"
-                style="@style/NumberButton"
-                android:text="@string/btn_0"
-                android:onClick="onNumberClick"
-                app:layout_constraintEnd_toStartOf="@id/btnDecimal"
-                app:layout_constraintStart_toStartOf="@id/guideline_start"
-                app:layout_constraintTop_toBottomOf="@id/btn1"
-                app:layout_constraintWidth_default="wrap" />
-
-            <Button
-                android:id="@+id/btnDecimal"
-                style="@style/NumberButton"
-                android:text="@string/btn_decimal"
-                android:onClick="onNumberClick"
-                app:layout_constraintEnd_toStartOf="@id/btnSqrt"
-                app:layout_constraintStart_toEndOf="@id/btn0"
-                app:layout_constraintTop_toTopOf="@id/btn0"
-                app:layout_constraintWidth_default="wrap" />
-
-            <Button
-                android:id="@+id/btnSqrt"
-                style="@style/OperationButton"
-                android:text="@string/btn_sqrt"
-                android:onClick="onSqrtClick"
-                app:layout_constraintEnd_toStartOf="@id/btnPercent"
-                app:layout_constraintStart_toEndOf="@id/btnDecimal"
-                app:layout_constraintTop_toTopOf="@id/btn0"
-                app:layout_constraintWidth_default="wrap" />
-
-            <Button
-                android:id="@+id/btnPercent"
-                style="@style/OperationButton"
-                android:text="@string/btn_percent"
-                android:onClick="onPercentClick"
-                app:layout_constraintEnd_toEndOf="@id/guideline_end"
-                app:layout_constraintStart_toEndOf="@id/btnSqrt"
-                app:layout_constraintTop_toTopOf="@id/btn0"
-                app:layout_constraintWidth_default="wrap" />
-
-            <!-- Row 6: sin, cos, tan, ln -->
-            <Button
-                android:id="@+id/btnSin"
-                style="@style/OperationButton"
-                android:text="sin"
-                android:onClick="onSinClick"
-                app:layout_constraintEnd_toStartOf="@id/btnCos"
-                app:layout_constraintStart_toStartOf="@id/guideline_start"
-                app:layout_constraintTop_toBottomOf="@id/btn0"
-                app:layout_constraintWidth_default="wrap" />
-
-            <Button
-                android:id="@+id/btnCos"
-                style="@style/OperationButton"
-                android:text="cos"
-                android:onClick="onCosClick"
-                app:layout_constraintEnd_toStartOf="@id/btnTan"
-                app:layout_constraintStart_toEndOf="@id/btnSin"
-                app:layout_constraintTop_toTopOf="@id/btnSin"
-                app:layout_constraintWidth_default="wrap" />
-
-            <Button
-                android:id="@+id/btnTan"
-                style="@style/OperationButton"
-                android:text="tan"
-                android:onClick="onTanClick"
-                app:layout_constraintEnd_toStartOf="@id/btnLn"
-                app:layout_constraintStart_toEndOf="@id/btnCos"
-                app:layout_constraintTop_toTopOf="@id/btnSin"
-                app:layout_constraintWidth_default="wrap" />
-
-            <Button
-                android:id="@+id/btnLn"
-                style="@style/OperationButton"
-                android:text="ln"
-                android:onClick="onLnClick"
-                app:layout_constraintEnd_toEndOf="@id/guideline_end"
-                app:layout_constraintStart_toEndOf="@id/btnTan"
-                app:layout_constraintTop_toTopOf="@id/btnSin"
-                app:layout_constraintWidth_default="wrap" />
-
-            <!-- Row 7: log, eˣ, xʸ, ⁿ√x -->
-            <Button
-                android:id="@+id/btnLog"
-                style="@style/OperationButton"
-                android:text="log"
-                android:onClick="onLogClick"
-                app:layout_constraintEnd_toStartOf="@id/btnExp"
-                app:layout_constraintStart_toStartOf="@id/guideline_start"
-                app:layout_constraintTop_toBottomOf="@id/btnSin"
-                app:layout_constraintWidth_default="wrap" />
-
-            <Button
-                android:id="@+id/btnExp"
-                style="@style/OperationButton"
-                android:text="eˣ"
-                android:onClick="onExpClick"
-                app:layout_constraintEnd_toStartOf="@id/btnPower"
-                app:layout_constraintStart_toEndOf="@id/btnLog"
-                app:layout_constraintTop_toTopOf="@id/btnLog"
-                app:layout_constraintWidth_default="wrap" />
-
-            <Button
-                android:id="@+id/btnPower"
-                style="@style/OperationButton"
-                android:text="xʸ"
-                android:onClick="onPowerClick"
-                app:layout_constraintEnd_toStartOf="@id/btnNthRoot"
-                app:layout_constraintStart_toEndOf="@id/btnExp"
-                app:layout_constraintTop_toTopOf="@id/btnLog"
-                app:layout_constraintWidth_default="wrap" />
-
-            <Button
-                android:id="@+id/btnNthRoot"
-                style="@style/OperationButton"
-                android:text="ⁿ√x"
-                android:onClick="onNthRootClick"
-                app:layout_constraintEnd_toEndOf="@id/guideline_end"
-                app:layout_constraintStart_toEndOf="@id/btnPower"
-                app:layout_constraintTop_toTopOf="@id/btnLog"
-                app:layout_constraintWidth_default="wrap" />
-
-            <!-- Row 8: (, ), π, e -->
-            <Button
-                android:id="@+id/btnOpenParen"
-                style="@style/OperationButton"
-                android:text="("
-                android:onClick="onParenClick"
-                app:layout_constraintEnd_toStartOf="@id/btnCloseParen"
-                app:layout_constraintStart_toStartOf="@id/guideline_start"
-                app:layout_constraintTop_toBottomOf="@id/btnLog"
-                app:layout_constraintWidth_default="wrap" />
-
-            <Button
-                android:id="@+id/btnCloseParen"
-                style="@style/OperationButton"
-                android:text=")"
-                android:onClick="onParenClick"
-                app:layout_constraintEnd_toStartOf="@id/btnPi"
-                app:layout_constraintStart_toEndOf="@id/btnOpenParen"
-                app:layout_constraintTop_toTopOf="@id/btnOpenParen"
-                app:layout_constraintWidth_default="wrap" />
-
-            <Button
-                android:id="@+id/btnPi"
-                style="@style/OperationButton"
-                android:text="π"
-                android:onClick="onPiClick"
-                app:layout_constraintEnd_toStartOf="@id/btnE"
-                app:layout_constraintStart_toEndOf="@id/btnCloseParen"
-                app:layout_constraintTop_toTopOf="@id/btnOpenParen"
-                app:layout_constraintWidth_default="wrap" />
-
-            <Button
-                android:id="@+id/btnE"
-                style="@style/OperationButton"
-                android:text="e"
-                android:onClick="onEClick"
-                app:layout_constraintEnd_toEndOf="@id/guideline_end"
-                app:layout_constraintStart_toEndOf="@id/btnPi"
-                app:layout_constraintTop_toTopOf="@id/btnOpenParen"
-                app:layout_constraintWidth_default="wrap" />
+            <!-- Row 8 -->
+            <Button android:id="@+id/btnOpenParen" style="@style/OperationButton" android:text="(" android:onClick="onParenClick" />
+            <Button android:id="@+id/btnCloseParen" style="@style/OperationButton" android:text=")" android:onClick="onParenClick" />
+            <Button android:id="@+id/btnPi" style="@style/OperationButton" android:text="π" android:onClick="onPiClick" />
+            <Button android:id="@+id/btnE" style="@style/OperationButton" android:text="e" android:onClick="onEClick" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

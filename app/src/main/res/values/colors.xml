@@ -2,4 +2,51 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- Luxury Gold & Transparent Palette -->
+    <color name="bg_main">#0A0A0A</color>
+    <color name="bg_surface">#141414</color>
+
+    <!-- Premium Gold Tones -->
+    <color name="gold_primary">#D4AF37</color> <!-- Metallic Gold -->
+    <color name="gold_vibrant">#FFD700</color> <!-- Bright Gold -->
+    <color name="gold_dark">#996515</color>    <!-- Golden Brown -->
+    <color name="gold_soft">#F9E79F</color>    <!-- Pale Gold -->
+
+    <!-- Transparent / Border Styles -->
+    <color name="btn_transparent_bg">#00000000</color>
+    <color name="btn_border_gold">#80D4AF37</color> <!-- Semi-transparent Gold -->
+    <color name="btn_ripple_gold">#33D4AF37</color>
+
+    <!-- UI Accents -->
+    <color name="accent_gold">#D4AF37</color>
+    <color name="text_hint">#666666</color>
+
+    <!-- Standard Mappings for compatibility -->
+    <color name="warm_background_start">@color/bg_main</color>
+    <color name="warm_background_end">@color/bg_surface</color>
+
+    <!-- Number Buttons: Transparent with Gold Border -->
+    <color name="warm_button_number_start">@color/btn_transparent_bg</color>
+    <color name="warm_button_number_end">@color/btn_transparent_bg</color>
+    <color name="warm_button_number_stroke">@color/btn_border_gold</color>
+    <color name="warm_button_number_pressed">@color/btn_ripple_gold</color>
+    <color name="color_num_text">@color/gold_soft</color>
+
+    <!-- Operation Buttons: Solid Gold -->
+    <color name="warm_accent_start">@color/gold_primary</color>
+    <color name="warm_accent_end">@color/gold_primary</color>
+    <color name="warm_accent_pressed">@color/gold_dark</color>
+    <color name="warm_accent_light">@color/gold_vibrant</color>
+    <color name="color_op_text">#000000</color>
+
+    <!-- Special Buttons: Dark Gold -->
+    <color name="warm_special_start">@color/gold_dark</color>
+    <color name="warm_special_end">@color/gold_dark</color>
+    <color name="color_spec_text">#FFFFFF</color>
+
+    <!-- UI Elements -->
+    <color name="warm_result_bg">@color/bg_surface</color>
+    <color name="warm_result_stroke">@color/gold_primary</color>
+    <color name="accent_warm">@color/gold_primary</color>
 </resources>

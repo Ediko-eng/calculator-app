@@ -65,12 +65,25 @@ public class MainActivity extends AppCompatActivity {
 
     public void onPercentClick(View view) {
         String current = etInput.getText().toString();
-        if (current.isEmpty()) {
-            current = tvResultado.getText().toString();
-            if (current.isEmpty()) return;
-            etInput.setText(current);
+        if (current.isEmpty()) return;
+
+        // Correct % logic: Convert the current number to a percentage (e.g., 50 -> 0.5)
+        try {
+            // Find the last number in the expression
+            Pattern p = Pattern.compile("(\\d+\\.?\\d*)$");
+            Matcher m = p.matcher(current);
+            if (m.find()) {
+                String lastNumStr = m.group(1);
+                double value = Double.parseDouble(lastNumStr);
+                double percentValue = value / 100.0;
+                
+                String newExpression = current.substring(0, m.start()) + percentValue;
+                etInput.setText(newExpression);
+            }
+        } catch (Exception e) {
+            // Fallback to appending % if parsing fails
+            etInput.setText(current + "%");
         }
-        etInput.setText(appendSymbolAfterLastNumber(current, "%"));
     }
 
     public void onSqrtClick(View view) {
@@ -146,10 +159,17 @@ public class MainActivity extends AppCompatActivity {
         if (expr.isEmpty()) return;
         try {
             double result = evaluateExpression(expr);
-            tvResultado.setText(String.valueOf(result));
+            tvResultado.setText(formatResult(result));
         } catch (Exception e) {
             tvResultado.setText("Error");
         }
+    }
+
+    private String formatResult(double d) {
+        if (d == (long) d)
+            return String.format("%d", (long) d);
+        else
+            return String.valueOf(d);
     }
 
     // ==================== Expression Evaluation ====================
@@ -230,15 +250,14 @@ public class MainActivity extends AppCompatActivity {
             double arg = parseExpression(tokens);
             tokens.expect(')');
             switch (func) {
-                case "sin": return Math.sin(arg);
-                case "cos": return Math.cos(arg);
-                case "tan": return Math.tan(arg);
+                case "sin": return Math.sin(Math.toRadians(arg));
+                case "cos": return Math.cos(Math.toRadians(arg));
+                case "tan": return Math.tan(Math.toRadians(arg));
                 case "ln":  return Math.log(arg);
                 case "log": return Math.log10(arg);
                 case "exp": return Math.exp(arg);
                 case "sqrt":return Math.sqrt(arg);
                 case "root": {
-                    // root(index, value)
                     double index = arg;
                     tokens.expect(',');
                     double value = parseExpression(tokens);
@@ -287,14 +306,6 @@ public class MainActivity extends AppCompatActivity {
             }
             return input.substring(start, pos);
         }
-    }
-
-    // Helper: append symbol after the last number
-    private String appendSymbolAfterLastNumber(String expr, String symbol) {
-        int i = expr.length() - 1;
-        while (i >= 0 && (Character.isDigit(expr.charAt(i)) || expr.charAt(i) == '.')) i--;
-        if (i == expr.length() - 1) return expr + symbol;
-        return expr.substring(0, i + 1) + expr.substring(i + 1) + symbol;
     }
 
     // Helper: insert function before the last number (e.g., √)
