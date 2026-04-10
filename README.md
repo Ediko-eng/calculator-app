@@ -54,3 +54,11 @@ The main dashboard featuring the full range of arithmetic and scientific operati
 ```bash
 git clone [https://github.com/Ediko-eng/Calculator-App.git](https://github.com/Ediko-eng/Calculator-App.git)
 cd Calculator-App
+```
+
+---
+
+⚖️ License
+This project is licensed under the MIT License. 
+For the full legal text, please visit: [Official License Link](https://github.com/Ediko-eng/calculator-app/blob/main/LICENSE)
+
